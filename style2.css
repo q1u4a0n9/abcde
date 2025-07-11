@@ -1,0 +1,30 @@
+
+#cursor {
+  position: fixed; /* Keeps it in view regardless of scroll */
+  width: 25px;
+  height: 25px;
+  border-top: 5px solid #0f0;  /* Green arrow */
+  border-left: 5px solid #0f0; /* Green arrow */
+  transform: rotate(15deg);    /* Tilts the arrow */
+  transition: transform 0.1s; /* Smooths the hover effect */
+  pointer-events: none;       /* Allows clicking through the cursor */
+  
+  /* Creates a multi-layered glow */
+  filter: drop-shadow(0 0 5px #0f0) 
+          drop-shadow(0 0 15px #0f0) 
+          drop-shadow(0 0 35px #0f0) 
+          hue-rotate(60deg); 
+}
+
+body:hover #cursor {
+    transform: translate(-1px, 5px) rotate(15deg) scale(0.8);
+}
+
+.element {
+  position: absolute;
+  color: #0f0; /* Glowing text color */
+  pointer-events: none;
+  font-size: 1em;
+  transform: translate(-50%, -50%); /* Centers the text on the cursor */
+  transition: 1s; /* The animation will take 1 second to complete */
+}

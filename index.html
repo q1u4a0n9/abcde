@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đi tìm Trái Đất</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+
+    <!-- === KHUNG CẢNH HỆ MẶT TRỜI === -->
+    <div class="container">
+        <div class="sun"><img src="./images/sun.png" alt="Mặt Trời"></div>
+        
+        <div class="orbit" id="mercury-orbit">
+            <div class="planet" id="mercury" data-planet-id="mercury">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+        
+        <div class="orbit" id="venus-orbit">
+            <div class="planet" id="venus" data-planet-id="venus">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+        
+        <div class="orbit" id="earth-orbit">
+            <div class="planet" id="earth" data-planet-id="earth">
+                <div class="planet-image">
+                    <div class="orbit" id="moon-orbit">
+                        <div class="planet" id="moon" data-planet-id="moon">
+                             <div class="planet-image"></div>
+                             <div class="mystery-marker">?</div>
+                             <!-- Mặt trăng thật thì không cần mặt trăng giả -->
+                        </div>
+                    </div>
+                </div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+        
+        <div class="orbit" id="mars-orbit">
+            <div class="planet" id="mars" data-planet-id="mars">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+
+        <div class="orbit" id="jupiter-orbit">
+            <div class="planet" id="jupiter" data-planet-id="jupiter">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+
+        <div class="orbit" id="saturn-orbit">
+            <div class="planet" id="saturn" data-planet-id="saturn">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+
+        <div class="orbit" id="uranus-orbit">
+            <div class="planet" id="uranus" data-planet-id="uranus">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+
+        <div class="orbit" id="neptune-orbit">
+            <div class="planet" id="neptune" data-planet-id="neptune">
+                <div class="planet-image"></div>
+                <div class="mystery-marker">?</div>
+                <div class="fake-moon-orbit"><div class="fake-moon"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GIAO DIỆN NGƯỜI DÙNG KHÔNG ĐỔI -->
+    <div id="info-box" class="hidden">
+      <button id="close-btn" aria-label="Đóng">×</button>
+      <h2 id="info-title"></h2>
+      <p id="info-description"></p>
+    </div>
+    <div id="overlay-screen" class="visible">
+        <div id="intro-message">
+        <h1>Đi tìm Trái Đất</h1>
+        <p>Hệ Mặt Trời đang chờ bạn khám phá. Hãy cho chúng tôi biết tên của bạn, nhà du hành!</p>
+        
+        <!-- === MỚI: Thêm ô nhập liệu === -->
+        <input type="text" id="player-name-input" placeholder="Nhập tên của bạn...">
+        <!-- ============================= -->
+        
+        <button id="start-game-btn">Bắt đầu khám phá</button>
+    </div>
+        <div id="win-message" class="hidden">
+            <h1>XIN CHÚC MỪNG <span id="player-name-win"></span>!</h1>
+    <p>Bạn đã tìm thấy Trái Đất! Bạn có thể tiếp tục khám phá các hành tinh khác, hoặc kết thúc hành trình và di chuyển đến ngôi nhà mới ngay bây giờ.</p>
+
+    <!-- Thêm container chứa hai nút mới -->
+    <div class="win-buttons-container">
+        <button id="continue-exploring-btn" class="win-button secondary">Tiếp tục khám phá</button>
+        <button id="travel-to-earth-btn" class="win-button primary">Di chuyển đến Trái Đất</button>
+    </div>
+        </div>
+    </div>
+
+    <!-- SỬA LỖI: Đã xóa "onclick" khỏi button -->
+    <!-- === BẮT ĐẦU CỤM ĐIỀU KHIỂN ÂM THANH === -->
+<div id="volume-control-container">
+    <!-- Thanh trượt, ban đầu sẽ được CSS ẩn đi -->
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+    
+    <!-- Nút bấm icon, id không đổi -->
+    <button id="soundButton">
+        <i id="volumeIcon" class="fas fa-volume-up"></i>
+    </button>
+</div>
+    <audio id="audio" src="traidatommattroi.mp3" loop></audio>
+    
+    <script src="script.js"></script>
+
+    <div id="cursor"></div>
+  
+  <script>
+  // Cụm từ bạn muốn hiển thị
+  const trailText = "PA đáng yêu";
+
+  // Lấy phần tử con trỏ
+  const cursor = document.querySelector('#cursor');
+
+  // Lắng nghe sự kiện di chuyển chuột
+  document.onmousemove = function(e) {
+    // Di chuyển con trỏ theo chuột
+    cursor.style.top = e.pageY + 'px';
+    cursor.style.left = e.pageX + 'px';
+
+    // Tạo một phần tử div mới
+    let element = document.createElement('div');
+    element.className = 'element';
+    
+    // Gán toàn bộ cụm từ cho phần tử
+    element.innerHTML = trailText;
+
+    // Thêm phần tử vào đầu thẻ body
+    document.body.prepend(element);
+
+    // Đặt vị trí ban đầu của phần tử tại vị trí con trỏ
+    element.style.left = cursor.getBoundingClientRect().x + 'px';
+    element.style.top = cursor.getBoundingClientRect().y + 'px';
+
+    // Đặt hẹn giờ để thực hiện hoạt ảnh và xóa phần tử
+    setTimeout(function() {
+      // Di chuyển ngẫu nhiên aa
+      
+      let directionX = Math.random() < 0.5 ? -1 : 1;
+      let directionY = Math.random() < 0.5 ? -1 : 1;
+      element.style.left = parseInt(element.style.left) - (directionX * (Math.random() * 200)) + 'px';
+      element.style.top = parseInt(element.style.top) - (directionY * (Math.random() * 200)) + 'px';
+
+      // Làm mờ và thu nhỏ
+      element.style.opacity = 0;
+      element.style.transform = 'scale(0.25)';
+
+      // Xóa phần tử sau khi hoạt ảnh kết thúc (1 giây)
+      setTimeout(function() {
+        element.remove();
+      }, 3000);
+    }, 100);
+  }
+</script>
+
+</body>
+</html>

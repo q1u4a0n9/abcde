@@ -1,0 +1,404 @@
+/* --- THIẾT LẬP CƠ BẢN VÀ NỀN --- */
+body {
+    background-image: url('galaxyy.jpg'); /* Thay đường dẫn nếu cần */
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    overflow: hidden;
+}
+
+.container {
+    font-size: 10px;
+    width: 40em;
+    height: 40em;
+    position: relative;
+}
+
+/* --- MẶT TRỜI VÀ CÁC QUỸ ĐẠO --- */
+.sun {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 15em;
+    left: 15em;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    box-shadow: 0 0 3em rgb(255, 128, 0);
+    animation: orbit 50s linear infinite;
+    z-index: 10;
+}
+.sun img {
+    height: 130%;
+    width: 130%;
+}
+
+.orbit {
+    position: absolute;
+    border-radius: 50%;
+}
+.orbit::before {
+    content: ''; 
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.3) transparent transparent transparent;
+    border-width: 0.1em 0.1em 0 0;
+    pointer-events: none;
+}
+
+
+@keyframes orbit {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Kích thước và animation cho từng quỹ đạo */
+#mercury-orbit { top: 12.5em; left: 12.5em; width: 15em; height: 15em; animation: orbit 20.7s linear infinite; z-index: 9;}
+#venus-orbit { top: 10em; left: 10em; width: 20em; height: 20em; animation: orbit 48.7s linear infinite; z-index: 8;}
+#earth-orbit { top: 6em; left: 6em; width: 28em; height: 28em; animation: orbit 36.5s linear infinite; z-index: 7;}
+#moon-orbit { top: 0em; left: -1em; width: 7em; height: 7em; animation: orbit 2.7s linear infinite; z-index: 7;}
+#mars-orbit { top: 2em; left: 2.5em; width: 36em; height: 36em; animation: orbit 26.5s linear infinite; z-index: 6;}
+#jupiter-orbit { top: -2em; left: -2em; width: 45em; height: 45em; animation: orbit 21s linear infinite; z-index: 5;}
+#saturn-orbit { top: -7em; left: -7em; width: 55em; height: 55em; animation: orbit 17s linear infinite; z-index: 4;}
+#uranus-orbit { top: -12em; left: -12em; width: 65em; height: 65em; animation: orbit 19s linear infinite; z-index: 3;}
+#neptune-orbit { top: -17em; left: -17em; width: 75em; height: 75em; animation: orbit 15s linear infinite; z-index: 2;}
+
+/* === PHẦN QUAN TRỌNG: STYLE CHO CÁC HÀNH TINH VÀ TRẠNG THÁI === */
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, width 0.5s ease-in-out, height 0.5s ease-in-out;
+    z-index: 10;
+    
+    /* Kích thước CHUẨN cho tất cả hành tinh bí ẩn */
+    width: 4em;
+    height: 4em;
+}
+/* Mặt trăng thật luôn có kích thước nhỏ ngay từ đầu */
+#moon {
+    width: 1.2em; height: 1.2em;
+}
+
+.planet.highlight {
+    box-shadow: 0 0 4em yellow;
+    transform: scale(1.2);
+    z-index: 20; /* Nổi lên trên tất cả */
+}
+
+/* Định vị chung cho các hành tinh trên quỹ đạo của chúng */
+#mercury { top: 1.5em; right: 0.8em; }
+#venus { top: 2em; right: 2em; }
+#earth { top: 3em; right: 0em; }
+#moon { top: 0.8em; right: 0.2em; }
+#mars { top: 5em; right: 3em; }
+#jupiter { top: 6em; right: 3em; }
+#saturn { top: 7.5em; right: 5em; }
+#uranus { top: 9em; right: 6.5em; }
+#neptune { top: 10em; right: 8em; }
+
+/* --- STYLE CHO CÁC THÀNH PHẦN CON BÊN TRONG HÀNH TINH --- */
+.planet-image, .mystery-marker {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    border-radius: 50%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Style cho dấu '?' */
+.mystery-marker {
+    background-color: #555;
+    border: 0.2em solid #888;
+    box-shadow: inset 0 0 1em rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em; /* Kích thước dấu '?' */
+    color: #ccc;
+    font-weight: bold;
+}
+
+/* Style cho "MẶT TRĂNG GIẢ" */
+.fake-moon-orbit {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    animation: orbit 3s linear infinite;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+.fake-moon {
+    position: absolute;
+    top: -0.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.6em;
+    height: 0.6em;
+    background-color: #aaa;
+    border-radius: 50%;
+}
+
+
+/* Hình ảnh thật của các hành tinh (chỉ dùng để set hình nền) */
+#mercury .planet-image { background: url('./images/mercury.png') center/cover; }
+#venus .planet-image { background: url('./images/venus.png') center/cover; }
+#earth > .planet-image { background: url('./images/earth.png') center/cover; }
+#moon .planet-image { background: url('./images/moon.png') center/cover; }
+#mars .planet-image { background: url('./images/mars.png') center/cover; }
+#jupiter .planet-image { background: url('./images/jupiter.png') center/cover; }
+#saturn .planet-image { background: url('./images/saturn.png') center/cover; }
+#uranus .planet-image { background: url('./images/uranus.png') center/cover; }
+#neptune .planet-image { background: url('./images/neptune.png') center/cover; }
+
+/* === LOGIC HIỂN THỊ TRẠNG THÁI === */
+
+/* Trạng thái mặc định: Ẩn hình thật, hiện dấu '?' và mặt trăng giả */
+.planet .planet-image { opacity: 0; }
+.planet .mystery-marker { opacity: 1; }
+.planet .fake-moon-orbit { opacity: 1; }
+/* Mặt trăng thật thì không cần mặt trăng giả */
+#moon .fake-moon-orbit { display: none; }
+
+/* Trạng thái đã khám phá: Hiện hình thật, ẩn dấu '?' và mặt trăng giả */
+.planet.discovered .planet-image { opacity: 1; }
+.planet.discovered .mystery-marker { opacity: 0; pointer-events: none; }
+.planet.discovered .fake-moon-orbit { opacity: 0; pointer-events: none; }
+
+/* Kích thước thật của các hành tinh CHỈ áp dụng KHI ĐÃ KHÁM PHÁ */
+#mercury.discovered, #venus.discovered { width: 2em; height: 2em; }
+#earth.discovered { width: 5em; height: 5em; }
+#mars.discovered { width: 3em; height: 3em; }
+#jupiter.discovered { width: 5em; height: 5em; }
+#saturn.discovered { width: 4.5em; height: 4.5em; }
+#uranus.discovered, #neptune.discovered { width: 4em; height: 4em; }
+
+/* --- STYLE CHO GIAO DIỆN NGƯỜI DÙNG (UI) --- */
+#info-box {
+    position: fixed; top: 50%; right: 20px; transform: translateY(-50%);
+    width: 250px; background-color: rgba(20, 20, 30, 0.85); border: 1px solid #778;
+    backdrop-filter: blur(5px); border-radius: 10px; color: white; padding: 20px;
+    font-size: 16px; z-index: 1000; transition: opacity 0.4s, transform 0.4s ease-out;
+}
+#info-box.hidden {
+    opacity: 0; transform: translate(120%, -50%); pointer-events: none;
+}
+#info-box h2 { margin-top: 0; color: #a2d2ff; }
+#info-box #close-btn {
+    position: absolute; top: 10px; right: 10px; background: none; border: none;
+    color: white; font-size: 24px; cursor: pointer;
+}
+#overlay-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center;
+    align-items: center; text-align: center; z-index: 2000;
+    opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0.5s;
+}
+#overlay-screen.visible { opacity: 1; visibility: visible; }
+#intro-message, #win-message { padding: 30px; max-width: 500px; }
+#intro-message.hidden, #win-message.hidden { display: none; }
+#overlay-screen h1 { font-size: 3em; color: #ffcc00; margin-bottom: 20px; }
+#overlay-screen p { font-size: 1.2em; line-height: 1.6; margin-bottom: 30px; }
+#overlay-screen button {
+    padding: 15px 30px; font-size: 1.2em; color: #111; background-color: #ffcc00;
+    border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+#overlay-screen button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4); }
+
+
+/* Style cho ô nhập tên */
+#player-name-input {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto 25px auto; /* Căn giữa và tạo khoảng cách */
+    padding: 12px;
+    font-size: 1.1em;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid #778;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+#player-name-input::placeholder {
+    color: #aaa;
+}
+#player-name-input:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Style cho tên người chơi ở màn hình chiến thắng */
+#player-name-win {
+    color: #ffcc00; /* Màu vàng giống nút bấm */
+}
+
+/* --- STYLE CHO CỤM ĐIỀU KHIỂN ÂM THANH - THEO YÊU CẦU MỚI --- */
+
+/* 1. Vùng chứa chung - Giờ đây nó sẽ vô hình */
+#volume-control-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000; /* Nổi trên cùng */
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Quan trọng: Đẩy item về phía bên phải */
+    
+    /* Không cần màu nền hay padding nữa */
+    /* background-color: transparent; */
+    border-radius: 50px;
+    
+    /* Thêm transition để nút di chuyển mượt hơn khi thanh trượt hiện ra */
+    transition: all 0.4s ease-in-out; 
+}
+
+/* 2. Thanh trượt âm lượng (logic ẩn/hiện không đổi) */
+#volume-slider {
+    /* Trạng thái ẩn ban đầu */
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    margin-right: 0;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-right 0.3s ease-in-out;
+    
+    -webkit-appearance: none;
+    appearance: none; 
+    background: transparent;
+    cursor: pointer;
+    height: 25px; /* Để dễ bấm hơn */
+}
+
+/* 3. Logic hiển thị khi hover vào vùng chứa */
+#volume-control-container:hover #volume-slider {
+    width: 80px;
+    opacity: 1;
+    visibility: visible;
+    margin-right: 10px; /* Tạo khoảng cách với nút bấm khi hiện ra */
+}
+
+/* 4. ÁP DỤNG STYLE CŨ CỦA BẠN CHO NÚT BẤM */
+#soundButton {
+    /* KHÔNG CẦN position, top, right nữa vì container đã quản lý */
+    /* position: fixed; top: 20px; right: 20px; z-index: 200; */
+    
+    background-color: #f0e6d2;
+    border-radius: 100%;
+    padding: 10px;
+    font-size: 25px; /* Giữ nguyên độ to */
+    border: none;
+    cursor: pointer;
+    color: #333; /* Thêm màu cho icon để dễ thấy trên nền sáng */
+    
+    /* Thêm các thuộc tính để nút không bị biến dạng */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; /* Quan trọng: Ngăn nút bị co lại */
+    
+    /* Vẫn giữ hiệu ứng transition cho nút bấm */
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+/* ÁP DỤNG HIỆU ỨNG HOVER CŨ CỦA BẠN */
+#soundButton:hover { 
+    box-shadow: 0 5px 15px #FF008D;
+    background-color: #fecdfe; 
+}
+
+/* Vùng chứa sẽ áp dụng hiệu ứng hover của nút khi chuột di qua thanh trượt */
+#volume-control-container:hover #soundButton {
+    box-shadow: 0 5px 15px #FF008D;
+    background-color: #fecdfe; 
+}
+
+/* 5. Custom giao diện của thanh trượt để hợp với theme màu mới */
+#volume-slider::-webkit-slider-runnable-track {
+    background: rgba(255, 0, 141, 0.4); /* Màu hồng nhạt */
+    height: 6px;
+    border-radius: 3px;
+}
+#volume-slider::-moz-range-track {
+    background: rgba(255, 0, 141, 0.4);
+    height: 6px;
+    border-radius: 3px;
+}
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px; 
+    background-color: #FF008D; /* Màu hồng đậm */
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+}
+#volume-slider::-moz-range-thumb {
+    background-color: #FF008D;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: none;
+}
+/* --- End of volume control styles --- */
+
+/* --- STYLE CHO CÁC NÚT TRÊN MÀN HÌNH CHIẾN THẮNG --- */
+.win-buttons-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Tạo khoảng cách giữa hai nút */
+    flex-wrap: wrap; /* Cho phép các nút xuống dòng trên màn hình nhỏ */
+}
+
+.win-button {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.win-button:hover {
+    transform: translateY(-3px);
+}
+
+/* Nút chính, nổi bật hơn */
+.win-button.primary {
+    color: #111; 
+    background-color: #ffcc00;
+}
+.win-button.primary:hover {
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+}
+
+/* Nút phụ, ít nổi bật hơn */
+.win-button.secondary {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #ffcc00;
+}
+.win-button.secondary:hover {
+     background-color: rgba(255, 204, 0, 0.1);
+     box-shadow: 0 5px 15px rgba(255, 204, 0, 0.2);
+}
