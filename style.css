@@ -157,15 +157,15 @@ body {
 
 
 /* Hình ảnh thật của các hành tinh (chỉ dùng để set hình nền) */
-#mercury .planet-image { background: url('./images/mercury.png') center/cover; }
-#venus .planet-image { background: url('./images/venus.png') center/cover; }
-#earth > .planet-image { background: url('./images/earth.png') center/cover; }
-#moon .planet-image { background: url('./images/moon.png') center/cover; }
-#mars .planet-image { background: url('./images/mars.png') center/cover; }
-#jupiter .planet-image { background: url('./images/jupiter.png') center/cover; }
-#saturn .planet-image { background: url('./images/saturn.png') center/cover; }
-#uranus .planet-image { background: url('./images/uranus.png') center/cover; }
-#neptune .planet-image { background: url('./images/neptune.png') center/cover; }
+#mercury .planet-image { background: url('mercury.png') center/cover; }
+#venus .planet-image { background: url('venus.png') center/cover; }
+#earth > .planet-image { background: url('earth.png') center/cover; }
+#moon .planet-image { background: url('moon.png') center/cover; }
+#mars .planet-image { background: url('mars.png') center/cover; }
+#jupiter .planet-image { background: url('jupiter.png') center/cover; }
+#saturn .planet-image { background: url('saturn.png') center/cover; }
+#uranus .planet-image { background: url('uranus.png') center/cover; }
+#neptune .planet-image { background: url('neptune.png') center/cover; }
 
 /* === LOGIC HIỂN THỊ TRẠNG THÁI === */
 
